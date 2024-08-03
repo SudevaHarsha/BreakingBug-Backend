@@ -1,4 +1,4 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
 const productSchema =  mongoose.Schema(
     {
@@ -32,8 +32,7 @@ const productSchema =  mongoose.Schema(
             type: String
         },
         quantity: {
-            type: Number,
-            default: 45
+            type: Number,  // deault:45 is removed
         },
         reviews: [
             {
@@ -45,11 +44,11 @@ const productSchema =  mongoose.Schema(
                 },
                 reviewer: {
                     type: mongoose.Schema.Types.ObjectId,
-                    ref: "CUSTOMERS",
+                    ref: "customer",  //changed from CUSTOMER -> customer
                 },
                 date: {
                     type: Date,
-                    default: Text,
+                    default: Date.now,  // Date is changed from Text -> Date.now
                 },
             },
         ],
@@ -59,4 +58,4 @@ const productSchema =  mongoose.Schema(
         },
     }, { timestamps: false});
 
-module.exports = mongoose.mongoose("product", productSchema)
+module.exports = mongoose.model("product", productSchema)  // mongoode -> model

@@ -16,7 +16,7 @@ const sellerSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        default: "seller"
+        default: "Seller" // seller -> Seller
     },
     shopName: {
         type: String,
@@ -25,4 +25,4 @@ const sellerSchema = new mongoose.Schema({
     }
 });
 
-moduleexports = mongoose.model("seller", sellerSchema)
+module.exports = mongoose.model("seller", sellerSchema)  // moduleexports -> module.exports

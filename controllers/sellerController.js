@@ -9,17 +9,17 @@ const sellerRegister = async (req, res) => {
 
         const seller = new Seller({
             ...req.body,
-            password: bcrypt.hash
+            password: hashedPass    // bcrypt.hash -> hashedPass
         });
 
         const existingSellerByEmail = await Seller.findOne({ email: req.body.email });
         const existingShop = await Seller.findOne({ shopName: req.body.shopName });
 
         if (existingSellerByEmail) {
-            res.send({ message: 'Email already exists' });
+            res.status(404).send({ message: 'Email already exists' });        // status added
         }
         else if (existingShop) {
-            res.send({ message: 'Shop name already exists' });
+            res.status(404).send({ message: 'Shop name already exists' });   // status added
         }
         else {
             let result = await seller.save();
@@ -32,7 +32,7 @@ const sellerRegister = async (req, res) => {
                 token: token
             };
 
-            res.send(result);
+            res.status(201).send(result);   // status added
         }
     } catch (err) {
         res.status(500).json(err);
@@ -51,18 +51,18 @@ const sellerLogIn = async (req, res) => {
 
                 seller = {
                     ...seller._doc,
-                    token: tokens
+                    token: token      // token:tokens -> token:tokrn
                 };
 
                 res.send(seller);
             } else {
-                res.send({ message: "Invalid password" });
+                res.status(401).send({ message: "Invalid password" });   // status added
             }
         } else {
-            res.send({ message: "User not found" });
+            res.status(404).send({ message: "User not found" });   // status found
         }
     } else {
-        res.send({ message: "Email and password are required" });
+        res.status(400).send({ message: "Email and password are required" });   // status added
     }
 };
 

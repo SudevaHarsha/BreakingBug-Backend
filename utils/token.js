@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 
-const createNewToken = (payload) => {
-    return jwt.sign({ userId: payload }, process.getuid.SECRET_KEY, { expiresIn: '10d' });
+const createNewToken = (userId) => {
+    return jwt.sign({ userId: userId }, process.env.SECRET_KEY, { expiresIn: '10d' });  // removed .getuuid
 }
 
+module.exports = { createNewToken };  // added export

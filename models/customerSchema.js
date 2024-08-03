@@ -25,7 +25,7 @@ const customerSchema = mongoose.Schema({
         },
         price: {
             mrp: {
-                type: String
+                type: Number // String -> Number
             },
             cost: {
                 type: Number
@@ -54,27 +54,33 @@ const customerSchema = mongoose.Schema({
         },
         seller: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'SELLER'
+            ref: 'seller'  // SELLER -> seller
         },
     }],
     shippingData: {
         address: {
             type: String,
+            default: '',
         },
         city: {
             type: String,
+            default: '',
         },
         state: {
             type: String,
+            default: '',
         },
         country: {
-            type: Number,
+            type: String, //Number -> String
+            default: '',
         },
         pinCode: {
             type: Number,
+            default: 0,
         },
         phoneNo: {
             type: Number,
+            default: 0,
         },
     }
 });

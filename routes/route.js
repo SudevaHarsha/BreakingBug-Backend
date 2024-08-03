@@ -4,13 +4,15 @@ const authMiddleware = require('../middleware/authMiddleware.js');
 const {
     sellerRegister,
     sellerLogIn
-} = require('../controllers/orderController.js');
+} = require('../controllers/sellerController.js');  // orderController.js -> sellerController.js
 
 const {
     productCreate,
     getProducts,
     getProductDetail,
     searchProductbyCategory,
+    searchProduct,              // import added
+    searchProductbySubCategory, // import added
     getSellerProducts,
     updateProduct,
     deleteProduct,
@@ -31,7 +33,8 @@ const {
 
 const {
     newOrder,
-    getOrderedProductsBySeller
+    getOrderedProductsBySeller,
+    getOrderedProductsByCustomer // import added
 } = require('../controllers/orderController.js');
 
 
@@ -50,13 +53,13 @@ router.get('/getAddedToCartProducts/:id', getAddedToCartProducts);
 router.put('/ProductUpdate/:id', updateProduct);
 router.put('/addReview/:id', addReview);
 
-router.get('/searchProduct/:key', searchProductbyCategory);
+router.get('/searchProduct/:key', searchProduct);                            // searchProductByCategory -> searchProduct
 router.get('/searchProductbyCategory/:key', searchProductbyCategory);
-router.get('/searchProductbySubCategory/:key', searchProductbyCategory);
+router.get('/searchProductbySubCategory/:key', searchProductbySubCategory);  // searchProductByCategory -> searchProductBySubCategory
 
 router.delete('/DeleteProduct/:id', deleteProduct);
 router.delete('/DeleteProducts/:id', deleteProducts);
-router.delete ('/deleteProductReview/:id', deleteProductReview);
+router.put ('/deleteProductReview/:id', deleteProductReview);                // delete method -> put method
 router.put ('/deleteAllProductReviews/:id', deleteAllProductReviews);
 
 // Customer
@@ -67,5 +70,7 @@ router.put('/CustomerUpdate/:id', cartUpdate);
 
 // Order
 router.post('/newOrder', newOrder);
-router.get('/getOrderedProductsByCustomer/:id', getOrderedProductsBySeller);
+router.get('/getOrderedProductsByCustomer/:id', getOrderedProductsByCustomer); // getOrderedProductsBySeller -> getOrderedProductsByCustomer
 router.get('/getOrderedProductsBySeller/:id', getOrderedProductsBySeller);
+
+module.exports = router; // export statement is added

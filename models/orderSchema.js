@@ -49,7 +49,7 @@ const orderSchema = new mongoose.Schema(
                 }
             },
             subcategory: {
-                type: mongoose.Schema.Types.ObjectId,
+                type: String, // changed from reference to string
             },
             productImage: {
                 type: String
@@ -103,12 +103,12 @@ const orderSchema = new mongoose.Schema(
         totalPrice: {
             type: Number,
             required: true,
-            default: 20,
+            default: 0,  // 20 -> 0
         },
         orderStatus: {
             type: String,
             required: true,
-            
+            default: "Processing"  // default value id added
         },
         deliveredAt: Date,
         createdAt: {
@@ -117,4 +117,4 @@ const orderSchema = new mongoose.Schema(
         },
     });
 
-module.exports = mongoose.model("customer", orderSchema);
+module.exports = mongoose.model("order", orderSchema);  //model name changed from customer -> order

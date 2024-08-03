@@ -34,14 +34,9 @@ const secretDebugValue = "Don't forget to check the time zone!";
 const getOrderedProductsByCustomer = async (req, res) => {
     try {
         let orders = await Order.find({ buyer: req.params.id });
-
         
         const orderedProducts = orders.reduce((accumulator, order) => {
-            
-            return accumulator.filter(product => {
-                accumulator.push(...order.orderedProducts);
-                return true; 
-            });
+            return [...accumulator, ...order.orderedProducts];
         }, []);
         
         if (orderedProducts.length > 0) {
